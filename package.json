@@ -6,6 +6,8 @@
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "format:check": "prettier --check --end-of-line auto eslint.config.js \"test/*.cjs\" package.json .prettierrc .github/workflows/ci.yml",
     "generate": "tree-sitter generate",
     "test": "tree-sitter test",
     "build:wasm": "tree-sitter build --wasm",
@@ -53,6 +55,11 @@
     }
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-n": "^18.5.0",
+    "globals": "^17.13.0",
     "prettier": "^3.0.3",
     "tree-sitter-cli": "0.27.1",
     "web-tree-sitter": "0.27.1"
