@@ -1828,7 +1828,7 @@
     },
     "uri": {
       "type": "PATTERN",
-      "value": "[^\\[\\]\\{\\}]+"
+      "value": "[^\\{\\}]+"
     },
     "label": {
       "type": "PATTERN",
@@ -7379,21 +7379,46 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "FIELD",
-            "name": "command",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "command",
+                "content": {
                   "type": "STRING",
                   "value": "\\url"
-                },
-                {
-                  "type": "STRING",
-                  "value": "\\href"
                 }
-              ]
-            }
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "FIELD",
+                    "name": "command",
+                    "content": {
+                      "type": "STRING",
+                      "value": "\\href"
+                    }
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "options",
+                    "content": {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "brack_group_key_value"
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
           },
           {
             "type": "FIELD",

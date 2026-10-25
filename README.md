@@ -1,22 +1,30 @@
 # tree-sitter-latex
 
-[![CI](https://github.com/latex-lsp/tree-sitter-latex/workflows/CI/badge.svg)](https://github.com/latex-lsp/tree-sitter-latex/actions)
-[![npm](https://img.shields.io/npm/v/@pfoerster/tree-sitter-latex)](https://www.npmjs.com/package/@pfoerster/tree-sitter-latex)
+A Tree-sitter grammar for LaTeX documents.
 
-This repo provides a [LaTeX](https://www.latex-project.org/) grammar for the [tree-sitter](https://github.com/tree-sitter/tree-sitter) parser generator.
+Fork of [latex-lsp/tree-sitter-latex](https://github.com/latex-lsp/tree-sitter-latex).
 
-Originally, this grammar is based off the parser of the [`texlab`](https://github.com/latex-lsp/texlab) language server and primarily focuses on the constructs that are relevant for the language server.
+The upstream grammar originated from the parser of the [texlab](https://github.com/latex-lsp/texlab) language server. It recognizes LaTeX document structure without trying to interpret arbitrary TeX macros or category codes.
 
-This repository does not provide the accompanying highlighting definitions, instead they live in the [`nvim-treesitter`](https://github.com/nvim-treesitter/nvim-treesitter/tree/master/queries/latex) repository.
+## Features
 
-To generate the parser, run
+- **Documents**: parses sections, environments, commands, math and comments.
+- **Hyperlinks**: separates URL destinations from command names, optional href settings and visible labels.
+- **Destinations**: retains square brackets in IPv6 hosts and query strings, percent-encoded braces and TeX escapes.
+- **Bindings**: preserves the upstream language bindings and portable WebAssembly parser builds.
 
+## Building
+
+The repository tracks grammar sources and node metadata. Generate the parser before compiling bindings or packaging it; generated C and WebAssembly outputs stay outside Git.
+
+```sh
+npm ci --ignore-scripts
+npm run generate
+npm test
+npm run test:wasm
+npm pack --dry-run
 ```
-npx tree-sitter generate
-```
 
-after checking out the repository.
+## Contributing
 
-## Limitations
-
-As widely known, parsing LaTeX is Turing complete so there is no way to handle every construct in a `tree-sitter` grammar. Instead, the grammar relies on a best effort approach while focusing on the LaTeX specific constructs like environments or sections instead of dealing with TeX internals like catcode.
+Got ideas to make this package better, found a bug, or want to help add new features? Just drop your thoughts on GitHub. Any feedback is welcome!

@@ -4683,6 +4683,16 @@
           }
         ]
       },
+      "options": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "brack_group_key_value",
+            "named": true
+          }
+        ]
+      },
       "uri": {
         "multiple": false,
         "required": true,

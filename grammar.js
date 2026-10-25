@@ -405,7 +405,7 @@ module.exports = grammar({
 
     path: $ => /[^\*\"\[\]:;,\|\{\}<>]+/,
 
-    uri: $ => /[^\[\]\{\}]+/,
+    uri: $ => /[^\{\}]+/,
 
     label: $ => /[^\\\[\]\{\}\$\(\)=&%\s\^\#\~,]+/,
 
@@ -1374,7 +1374,13 @@ module.exports = grammar({
     hyperlink: $ =>
       prec.right(
         seq(
-          field('command', choice('\\url', '\\href')),
+          choice(
+            field('command', '\\url'),
+            seq(
+              field('command', '\\href'),
+              field('options', optional($.brack_group_key_value)),
+            ),
+          ),
           field('uri', $.curly_group_uri),
           field('label', optional($.curly_group)),
         ),

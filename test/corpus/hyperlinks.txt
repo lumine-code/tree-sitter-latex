@@ -1,0 +1,83 @@
+================================================================================
+Hyperref options precede the destination
+================================================================================
+
+\href[page=2,pdfnewwindow=true]{https://example.com/manual.pdf}{Visible title}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (hyperlink
+    (brack_group_key_value
+      (key_value_pair
+        (text
+          (word))
+        (value
+          (text
+            (word))))
+      (key_value_pair
+        (text
+          (word))
+        (value
+          (text
+            (word)))))
+    (curly_group_uri
+      (uri))
+    (curly_group
+      (text
+        (word)
+        (word)))))
+
+================================================================================
+Square brackets are part of URI content
+================================================================================
+
+\url{https://example.com/?filter[name]=value}
+\href{https://[2001:db8::1]:8080/path?q=[value]}{IPv6 target}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (hyperlink
+    (curly_group_uri
+      (uri)))
+  (hyperlink
+    (curly_group_uri
+      (uri))
+    (curly_group
+      (text
+        (word)
+        (word)))))
+
+================================================================================
+Encoded delimiters and TeX escapes stay inside the destination
+================================================================================
+
+\url{https://example.com/%7Bitem%7D?q=one&next=two#part}
+\href{https://example.com/a\_b?q=one\&next=100\%\#part}{A \textbf{formatted} label}
+\href{mailto:reader@example.com}{Email}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (hyperlink
+    (curly_group_uri
+      (uri)))
+  (hyperlink
+    (curly_group_uri
+      (uri))
+    (curly_group
+      (text
+        (word)
+        (generic_command
+          (command_name)
+          (curly_group
+            (text
+              (word))))
+        (word))))
+  (hyperlink
+    (curly_group_uri
+      (uri))
+    (curly_group
+      (text
+        (word)))))
