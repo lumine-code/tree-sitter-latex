@@ -43,8 +43,8 @@
   },
   "homepage": "https://github.com/lumine-code/tree-sitter-latex",
   "dependencies": {
-    "node-addon-api": "^8.0.0",
-    "node-gyp-build": "^4.8.0"
+    "node-addon-api": "^8.9.2",
+    "node-gyp-build": "^4.8.4"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.0 || ^0.25.0"
@@ -60,7 +60,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-n": "^18.5.0",
     "globals": "^17.13.0",
-    "prettier": "^3.0.3",
+    "prettier": "^3.9.10",
     "tree-sitter-cli": "0.27.1",
     "web-tree-sitter": "0.27.1"
   },
