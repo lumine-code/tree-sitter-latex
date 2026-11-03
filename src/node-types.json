@@ -5123,6 +5123,21 @@
     }
   },
   {
+    "type": "label",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "placeholder",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "label_definition",
     "named": true,
     "fields": {
@@ -11074,10 +11089,6 @@
   },
   {
     "type": "delimiter",
-    "named": true
-  },
-  {
-    "type": "label",
     "named": true
   },
   {

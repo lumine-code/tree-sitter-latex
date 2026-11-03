@@ -21,3 +21,9 @@ require('./paths.cjs')(() => {
   parser.setLanguage(language);
   return parser;
 });
+
+require('./labels.cjs')(() => {
+  const parser = new Parser();
+  parser.setLanguage(language);
+  return parser;
+});

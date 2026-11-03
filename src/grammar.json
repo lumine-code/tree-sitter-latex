@@ -10,10 +10,6 @@
         "name": "_root_content"
       }
     },
-    "_whitespace": {
-      "type": "PATTERN",
-      "value": "\\s+"
-    },
     "line_comment": {
       "type": "PATTERN",
       "value": "%[^\\r\\n]*"
@@ -1831,8 +1827,49 @@
       "value": "[^\\{\\}]+"
     },
     "label": {
-      "type": "PATTERN",
-      "value": "[^\\\\\\[\\]\\{\\}\\$\\(\\)=&%\\s\\^\\#\\~,]+"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^\\\\\\[\\]\\{\\}\\$\\(\\)=&%\\s\\^\\#\\~,]+"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "placeholder"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[^\\\\\\[\\]\\{\\}\\$\\(\\)=&%\\s\\^\\#\\~,]+"
+                }
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "#+\\d"
+                  }
+                },
+                "named": true,
+                "value": "placeholder"
+              }
+            ]
+          }
+        }
+      ]
     },
     "argc": {
       "type": "PATTERN",
@@ -7479,8 +7516,8 @@
   },
   "extras": [
     {
-      "type": "SYMBOL",
-      "name": "_whitespace"
+      "type": "PATTERN",
+      "value": "\\s+"
     },
     {
       "type": "SYMBOL",

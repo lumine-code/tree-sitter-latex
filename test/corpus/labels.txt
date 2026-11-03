@@ -1,0 +1,95 @@
+================================================================================
+Macro definitions retain placeholders inside complete labels
+================================================================================
+
+\newcommand{\labele}[1]{\label{e:#1}}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (new_command_definition
+    (curly_group_command_name
+      (command_name))
+    (brack_group_argc
+      (argc))
+    (curly_group
+      (label_definition
+        (curly_group_label
+          (label
+            (placeholder)))))))
+
+================================================================================
+Label references retain leading and repeated placeholders
+================================================================================
+
+\ref{e:#1}
+\ref{#1}
+\ref{prefix##1#2_suffix}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (label_reference
+    (curly_group_label_list
+      (label
+        (placeholder))))
+  (label_reference
+    (curly_group_label_list
+      (label
+        (placeholder))))
+  (label_reference
+    (curly_group_label_list
+      (label
+        (placeholder)
+        (placeholder)))))
+
+================================================================================
+Label lists keep comma boundaries around placeholder-bearing names
+================================================================================
+
+\cref{e:#1,e:##2,plain_label}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (label_reference
+    (curly_group_label_list
+      (label
+        (placeholder))
+      (label
+        (placeholder))
+      (label))))
+
+================================================================================
+Reference ranges retain both placeholder-bearing endpoints
+================================================================================
+
+\crefrange{e:#1}{e:#2}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (label_reference_range
+    (curly_group_label
+      (label
+        (placeholder)))
+    (curly_group_label
+      (label
+        (placeholder)))))
+
+================================================================================
+Plain underscore label structure remains unchanged
+================================================================================
+
+\label{plain_underscore:1}
+\ref{plain_underscore:1}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (label_definition
+    (curly_group_label
+      (label)))
+  (label_reference
+    (curly_group_label_list
+      (label))))

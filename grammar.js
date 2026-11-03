@@ -5,6 +5,9 @@ const sepBy1 = (rule, sep) => seq(rule, repeat(seq(sep, rule)));
 
 const sepBy = (rule, sep) => optional(sepBy1(rule, sep));
 
+const labelFragment = /[^\\\[\]\{\}\$\(\)=&%\s\^\#\~,]+/;
+const placeholderPattern = /#+\d/;
+
 const specialEnvironment = ({ rule, name, content, options }) => {
   const beginRule = `_${rule}_begin`;
   const endRule = `_${rule}_end`;
@@ -39,7 +42,8 @@ const specialEnvironment = ({ rule, name, content, options }) => {
 
 module.exports = grammar({
   name: 'latex',
-  extras: $ => [$._whitespace, $.line_comment],
+  // Anonymous whitespace lets immediate label fragments reject internal gaps.
+  extras: $ => [/\s+/, $.line_comment],
   externals: $ => [
     $._trivia_raw_fi,
     $._trivia_raw_env_comment,
@@ -59,8 +63,6 @@ module.exports = grammar({
     source_file: $ => repeat($._root_content),
 
     //--- Trivia
-
-    _whitespace: $ => /\s+/,
 
     line_comment: $ => /%[^\r\n]*/,
 
@@ -397,7 +399,7 @@ module.exports = grammar({
 
     word: $ => /[^\s\\%\{\},\$\[\]\(\)=\#&_\^\-\+\/\*]+/,
 
-    placeholder: $ => /#+\d/,
+    placeholder: $ => placeholderPattern,
 
     value_literal: $ => /(\d+\.)?\d+/,
 
@@ -407,7 +409,16 @@ module.exports = grammar({
 
     uri: $ => /[^\{\}]+/,
 
-    label: $ => /[^\\\[\]\{\}\$\(\)=&%\s\^\#\~,]+/,
+    label: $ =>
+      seq(
+        choice(labelFragment, $.placeholder),
+        repeat(
+          choice(
+            token.immediate(labelFragment),
+            alias(token.immediate(placeholderPattern), $.placeholder),
+          ),
+        ),
+      ),
 
     argc: $ => /\d/,
 

@@ -31,6 +31,7 @@ module.exports = [
         repeat: 'readonly',
         repeat1: 'readonly',
         seq: 'readonly',
+        token: 'readonly',
       },
     },
     rules: {
