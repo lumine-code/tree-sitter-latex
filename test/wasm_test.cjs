@@ -15,3 +15,9 @@ require('./hyperlinks.cjs')(() => {
   parser.setLanguage(language);
   return parser;
 });
+
+require('./paths.cjs')(() => {
+  const parser = new Parser();
+  parser.setLanguage(language);
+  return parser;
+});

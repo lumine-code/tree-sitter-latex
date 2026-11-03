@@ -403,7 +403,7 @@ module.exports = grammar({
 
     delimiter: $ => /&/,
 
-    path: $ => /[^\*\"\[\]:;,\|\{\}<>]+/,
+    path: $ => /[^\*\":;,\|\{\}<>]+/,
 
     uri: $ => /[^\{\}]+/,
 
@@ -416,7 +416,7 @@ module.exports = grammar({
     _glob_pattern_fragment: $ =>
       choice(
         seq('{', repeat($._glob_pattern_fragment), '}'),
-        /[^\"\[\]:;\|\{\}<>]+/,
+        /[^\":;\|\{\}<>]+/,
       ),
 
     operator: $ => choice('+', '-', '*', '/', '<', '>', '!', '|', ':', "'"),

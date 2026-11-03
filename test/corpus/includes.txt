@@ -186,3 +186,53 @@ Graphics include with options
             (word)))))
     (curly_group_path
       (path))))
+
+================================================================================
+Graphics paths with brackets and hashes
+================================================================================
+
+\includegraphics[width=\textwidth]{../assets/[r] supps-#12.png}
+\includegraphics{left[.png}
+\includegraphics{right].png}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (graphics_include
+    (brack_group_key_value
+      (key_value_pair
+        (text
+          (word))
+        (value
+          (generic_command
+            (command_name)))))
+    (curly_group_path
+      (path)))
+  (graphics_include
+    (curly_group_path
+      (path)))
+  (graphics_include
+    (curly_group_path
+      (path))))
+
+================================================================================
+Bibliography paths with brackets and hashes
+================================================================================
+
+\bibliography{refs/[archive]#1.bib,refs/#2].bib}
+\addbibresource[glob]{refs/[archive]#1.{bib,json}}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (bibtex_include
+    (curly_group_path_list
+      (path)
+      (path)))
+  (biblatex_include
+    (brack_group_key_value
+      (key_value_pair
+        (text
+          (word))))
+    (curly_group_glob_pattern
+      (glob_pattern))))
