@@ -1,0 +1,3 @@
+include LICENSE THIRD_PARTY_NOTICES README.md tree-sitter.json
+recursive-include src *.c *.h *.json
+recursive-include bindings/python *.c *.py *.pyi py.typed

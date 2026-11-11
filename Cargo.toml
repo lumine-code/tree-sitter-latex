@@ -12,7 +12,7 @@ readme = "README.md"
 autoexamples = false
 
 build = "bindings/rust/build.rs"
-include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*", "LICENSE", "THIRD_PARTY_NOTICES"]
+include = ["bindings/rust/*", "benches/bench_main.rs", "examples/texlab.tex", "grammar.js", "queries/*", "src/*", "LICENSE", "THIRD_PARTY_NOTICES"]
 
 [lib]
 path = "bindings/rust/lib.rs"
